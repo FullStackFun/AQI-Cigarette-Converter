@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>AQI-Cigarette Converter</title>
+    <meta name="description" content="An AQI-Cigarette Converter to calculate the equivalent number of cigarettes smoked per a given AQI level based on a model of PM2.5 concentration relative to AQI levels.">
+    
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="./public/xstyle.css">
+  </head>
+  <body>
+    
+      <div class="center">
+      <h1>AQI to Cigarette Converter</h1><h3>Just how bad <i>is</i> the air you're breathing?</h3>
+
+
+      <div class="row">     
+          <div class="column"><img src="./public/road1k.jpg"  style="width:100%"> </div> 
+          <div class="column"><img src="./public/breathe1k.jpg" style="width:100%"> </div> 
+        <div class='column'><img src="./public/fire1k.jpg" style="width:100%"></div>
+      </div>
+
+      <h4>An AQI of...</h4>
+        <form id="convertForm" class="border">
+          <input type="text" id="convertField" name="input" placeholder="100" style="width: 200px">
+          <input id="convert" type="submit" value='Convert!'>
+          <h4>is equivalent to smoking...</h4>
+        </form>
+        <p id='result'></p>
+        <code id='jsonResult'></code>
+      </div>
+   
+    <script src="https://code.jquery.com/jquery-2.2.1.min.js"
+            integrity="sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00="
+            crossorigin="anonymous"></script>
+    <script>
+      
+      
+       $(function() {
+        $('#convertForm').submit(function(event) {
+          event.preventDefault();
+          $.ajax({
+            url: '/api/convert',
+            type: 'get',
+            data: $('#convertForm').serialize(),
+            success: function(data) {
+              $('#result').text(data.string || data);
+             // $('#jsonResult').text(JSON.stringify(data));
+            }
+          });
+        });
+      });
+ 
+   </script>
+
+<!-- <a href='/views/model.html'>Model Assumptions</a><br> -->
+   <footer>
+    <div class='ending'>
+      
+      If you don't like smoking cigarettes without your consent (especially given how many <a href=https://www.bmj.com/content/360/bmj.j5855#:~:text=Conclusions%20Smoking%20only%20about%20one,smoking%20exists%20for%20cardiovascular%20disease. target='_blank' rel='noreferrer noopener'> additional health risks</a> you take on by "only" smoking 1-5 cigarettes a day), please check out respiratory protection. There are a lot of great N95 masks available (e.g., the <a href=https://www.amazon.com/3M-9105-Particulate-Respirator-Regular/dp/B005KLZAYU/?tag=madewithmike-20 target="_blank" rel="noreferrer noopener">3M VFlex</a>, the <a href='https://www.amazon.com/3M-Aura-Particulate-Respirator-9205/dp/B095FJ36H2/?tag=madewithmike-20' target="_blank" rel="noreferrer noopener">3M Aura</a>, or the <a href=https://www.amazon.com/3M-Particulate-Respirator-9502-Particulates/dp/B08NTS51JX?tag=madewithmike-20 target='_blank' rel='noreferrer noopener'>3M 9502+</a>) that will filter out the vast majority of PM2.5 particles and preserve your heart, brain, lungs, and other vital organs. You can buy them through my affiliate links to <a href='https://www.amazon.com/?tag=madewithmike-20' target='_blank' rel='noreferrer noopener'>Amazon</a>. I receive a few pennies when you do, which helps me pay for this sweet domain. Personally, I use the VFlex, but the Aura is another great choice, especially for people with smaller faces. As a bonus, any well-fitting N95 will also keep you from contracting just about any respiratory virus or bacteria in existence, as well as dramatically reduce the effects of pollen and other environmental allergens. 
+      <br><br>
+      Aside from N95s, it's also worth considering filtration through powered air purifiers for your home or office environment; even if you're fortunate enough to work from home and not deal wtih a commute or a toxic workplace, none of us are immune from climate change, whether through neverending (and ever-spreading) wildfires or run of the mill industrial pollution. You can build a Corsi-Rosenthal box with <a href=https://www.amazon.com/BNX-20x20x1-MERV-Filter-Pack/dp/B09XC3RQ3J/?tag=madewithmike-20 target='_blank' rel='noreferrer noopener'>4 air 20x20x1-inch HEPA filters</a>, a <a href=https://www.amazon.com/Amazon-Basics-Speed-Box-20-Inch/dp/B08XKC9K14/?tag=madewithmike-20 target='_blank' rel='noreferrer noopener'>20-inch box fan</a>, and <a href=https://www.amazon.com/Original-Strength-Duck-Silver-394475/dp/B0000DH4ME/?tag=madewithmike-20 target='_blank' rel='noreferrer noopener'>a roll of duct tape</a>; the whole setup will cost about as much as a couple tanks of gas or a few days of groceries, and you can get the same quality of filtration as that from <a href=https://www.amazon.com/LEVOIT-Purifiers-Monitor-Particles-Allergies/dp/B09BJMY8HL/?tag=madewithmike-20 target='_blank' rel='noreferrer noopener'>systems costing hundreds of dollars more</a>. Between my wife and I, we've made about 5 of these and once you make one, you realize it's no big deal to make more. And they work. Really well. 
+
+      <div class="final">
+     
+      </div>
+  </div>
+  </footer>
+
+
+
+
+  </body>
+</html>
